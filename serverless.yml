@@ -1,0 +1,14 @@
+service: nest-sls-template
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - httpApi: '*'
