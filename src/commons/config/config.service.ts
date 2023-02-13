@@ -1,10 +1,15 @@
+import { DataSource } from 'typeorm';
+
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
-    host: process.env.DB_HOST,
+    type: 'mysql',
+    host: String(process.env.DB_HOST),
     port: parseInt(process.env.DB_PORT, 10) || 3306,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    name: process.env.DB_NAME,
+    username: String(process.env.DB_USERNAME),
+    password: String(process.env.DB_PASSWORD),
+    database: String(process.env.DB_NAME),
+    autoLoadEntities: true,
+    synchronize: false,
   },
 });
