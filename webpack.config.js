@@ -5,6 +5,8 @@ module.exports = (options, webpack) => {
   const lazyImports = [
     '@nestjs/microservices/microservices-module',
     '@nestjs/websockets/socket-module',
+    'class-transformer/storage',
+    '@nestjs/swagger',
   ];
 
   return {
