@@ -6,9 +6,43 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
+  logs:
+    websocket: true
+
+
 
 functions:
   main:
-    handler: dist/main.handler
+    handler: dist/main.handlers.http
     events:
       - httpApi: '*'
+
+  teste:
+    handler: dist/main.handlers.ws.send
+    events:
+      - httpApi:
+          path: /send
+          method: post
+
+  WSConnect:
+    handler: dist/main.handlers.ws.connection
+    events:
+      - websocket:
+          route: $connect
+      - websocket:
+          route: $disconnect
+
+  WSDefault:
+    handler: dist/main.handlers.ws.default
+    events:
+      - websocket:
+          route: $default
+
+  WSHello:
+    handler: dist/main.handlers.ws.summary
+    events:
+      - websocket:
+          route: summary
+          routeResponseSelectionExpression: $default
+
+
