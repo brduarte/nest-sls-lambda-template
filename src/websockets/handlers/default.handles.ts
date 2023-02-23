@@ -14,8 +14,8 @@ export async function DefaultHandles(event) {
 
   const requestParams = {
     ConnectionId: connectionId,
-    Data: BSON.serialize({
-      message: 'action',
+    Data: JSON.stringify({
+      connected: 'true',
     }),
   };
 
