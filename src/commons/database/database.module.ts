@@ -14,9 +14,8 @@ export default TypeOrmModule.forRootAsync({
     port: +configService.get('database.port'),
     username: configService.get('database.username'),
     password: configService.get('database.password'),
-    database: configService.get('database.name'),
+    database: configService.get('database.database'),
     autoLoadEntities: true,
-    synchronize: true,
   }),
   // dataSource receives the configured DataSourceOptions
   // and returns a Promise<DataSource>.
