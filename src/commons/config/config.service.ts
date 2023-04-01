@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
-    type: 'mysql',
+    type: 'mongodb',
     host: String(process.env.DB_HOST),
     port: parseInt(process.env.DB_PORT, 10) || 3306,
     username: String(process.env.DB_USERNAME),

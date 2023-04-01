@@ -1,14 +1,11 @@
-import { Handler } from 'aws-lambda';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../../app.module';
 import serverlessExpress from '@vendia/serverless-express';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as process from 'process';
+import { INestApplication } from '@nestjs/common';
 
 export async function bootstrap(event?, context?, callback?): Promise<any> {
   const app: INestApplication = await NestFactory.create(AppModule);
-
-  app.useGlobalPipes(new ValidationPipe());
 
   //Adiciona o prefix /v1 em todas as rotas
   app.setGlobalPrefix('v1');
@@ -17,7 +14,9 @@ export async function bootstrap(event?, context?, callback?): Promise<any> {
   if (process.env.RUN_MODE === 'serverless') {
     return await startWithServerless(app, { event, context, callback });
   } else {
-    await app.listen(process.env.PORT || 3000);
+    const port = process.env.PORT || 3000;
+    await app.listen(port);
+    console.log(`Server Started in port http://localhost:${port} 🚀`);
   }
 }
 

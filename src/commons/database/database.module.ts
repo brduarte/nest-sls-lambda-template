@@ -9,7 +9,7 @@ export default TypeOrmModule.forRootAsync({
   // Use useFactory, useClass, or useExisting
   // to configure the DataSourceOptions.
   useFactory: (configService: ConfigService) => ({
-    type: 'mysql',
+    type: 'mongodb',
     host: configService.get('database.host'),
     port: +configService.get('database.port'),
     username: configService.get('database.username'),
