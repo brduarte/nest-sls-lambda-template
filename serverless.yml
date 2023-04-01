@@ -1,28 +1,23 @@
 service: nest-sls-template
 
+frameworkVersion: '3'
+useDotenv: true
+
 plugins:
   - serverless-offline
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  logs:
-    websocket: true
-
-
+  runtime: nodejs16.x
+  region: us-east-1
+  timeout: 20
 
 functions:
   main:
     handler: dist/main.handlers.http
     events:
       - httpApi: '*'
-
-  teste:
-    handler: dist/main.handlers.ws.send
-    events:
-      - httpApi:
-          path: /send
-          method: post
 
   WSConnect:
     handler: dist/main.handlers.ws.connection
@@ -38,11 +33,6 @@ functions:
       - websocket:
           route: $default
 
-  WSHello:
-    handler: dist/main.handlers.ws.summary
-    events:
-      - websocket:
-          route: summary
-          routeResponseSelectionExpression: $default
+
 
 

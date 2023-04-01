@@ -1,0 +1,11 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ext": "ts,json,yml",
+  "ignore": [
+    ".git",
+    "node_modules"
+  ],
+  "exec": "npm run dev:sls"
+}

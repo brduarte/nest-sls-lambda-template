@@ -1,15 +1,11 @@
 import AWS from 'aws-sdk';
 
-import { BSON } from 'bson';
-
 export async function DefaultHandles(event) {
-  const domain = event.requestContext.domainName;
-  const stage = event.requestContext.stage;
+  console.log(event.body);
   const connectionId = event.requestContext.connectionId;
-  const callbackUrl = `http://${domain}:3001`;
   const client = new AWS.ApiGatewayManagementApi({
     apiVersion: '2018-11-29',
-    endpoint: callbackUrl,
+    endpoint: process.env.WS_SEND_EVENT_URL,
   });
 
   const requestParams = {
