@@ -4,9 +4,14 @@ import { AppService } from './app.service';
 import DatabaseModule from './commons/database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
+import { OpenaiModule } from './commons/providers/openai/openai.module';
 
 @Module({
-  imports: [DatabaseModule, TypeOrmModule.forFeature([UserEntity])],
+  imports: [
+    DatabaseModule,
+    TypeOrmModule.forFeature([UserEntity]),
+    OpenaiModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

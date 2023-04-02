@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-apigatewaymanagementapi": "^3.276.0",
+    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
@@ -38,6 +39,7 @@
     "class-validator": "^0.14.0",
     "mongodb": "^3.7.3",
     "mysql2": "^3.1.2",
+    "openai": "^3.2.1",
     "redis": "^4.6.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
