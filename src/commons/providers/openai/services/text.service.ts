@@ -10,8 +10,8 @@ export class TextService extends BaseClientService {
     });
   }
 
-  public async completion() {
-    const prompt = this.mountText('Locais', 'Gramado');
+  public async completion(category: string, location: string) {
+    const prompt = this.mountText(category, location);
 
     //Todo descomentar quando tiver pronto
     // const { data } = await this.openai.createCompletion({
