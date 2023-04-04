@@ -1,6 +1,7 @@
 import ConfigModule from '../../config/config.module';
 import { Module } from '@nestjs/common';
 import { TextService } from './services/text.service';
+import { BaseClientService } from './services/base-client.service';
 
 @Module({
   imports: [ConfigModule],

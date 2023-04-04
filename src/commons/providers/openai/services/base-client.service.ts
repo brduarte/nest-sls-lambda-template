@@ -5,8 +5,7 @@ export abstract class BaseClientService {
   protected openai: OpenAIApi;
 
   protected constructor(param: ConfigurationParameters) {
-    //todo descomentar quando tiver pronto
-    // this.auth(param);
+    this.auth(param);
   }
 
   private auth(param: ConfigurationParameters) {

@@ -1,11 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { SearchService } from './services/search.service';
 
 @Controller('search')
 export class SearchController {
   constructor(private searchService: SearchService) {}
   @Get('/location')
-  async location() {
-    return this.searchService.searchLocations();
+  async location(
+    @Query('location') location: string,
+    @Query('category') category: string,
+  ) {
+    return this.searchService.searchLocations(category, location);
   }
 }

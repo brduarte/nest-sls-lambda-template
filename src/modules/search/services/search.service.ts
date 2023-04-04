@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TextService } from '../../../commons/providers/openai/services/text.service';
 import { CustomSearchService } from '../../../commons/providers/google/services/custom-search.service';
+import { ImageDto } from '../../../commons/providers/google/dtos/image.dto';
 
 @Injectable()
 export class SearchService {
@@ -9,14 +10,16 @@ export class SearchService {
     private customSearchService: CustomSearchService,
   ) {}
 
-  public async searchLocations() {
-    const suggestions = await this.findSuggestion('Bares', 'Gramado');
+  public async searchLocations(category: string, location: string) {
+    const suggestions: string[] = await this.findSuggestion(category, location);
 
     return this.findImagesBySuggestion(suggestions);
   }
   private async findImagesBySuggestion(suggestions: string[]) {
     const execute = suggestions.map(async (suggestion) => {
-      const images = await this.customSearchService.searchImage(suggestion);
+      const images: ImageDto[] = await this.customSearchService.searchImage(
+        suggestion,
+      );
 
       return {
         title: suggestion,
@@ -26,7 +29,10 @@ export class SearchService {
 
     return Promise.all(execute);
   }
-  private async findSuggestion(category: string, location: string) {
+  private async findSuggestion(
+    category: string,
+    location: string,
+  ): Promise<string[]> {
     const { choices } = await this.textService.completion(category, location);
 
     return choices[0].text.split('\n').filter((value) => value !== '');
