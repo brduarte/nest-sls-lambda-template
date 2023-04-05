@@ -8,7 +8,8 @@ export class CustomSearchService {
     const { data } = await this.search(search, {
       q: search,
       searchType: 'image',
-      num: 10,
+      imgType: 'photo',
+      num: 3,
     });
 
     return ImagesTransform.execute(data.items);
@@ -18,6 +19,8 @@ export class CustomSearchService {
     return customsearch('v1').cse.list({
       auth: 'AIzaSyCrvcRbBS-6sLxDCV-qe30ozJd-JtfCmzk',
       cx: 'f4cf28bd70d6a4a45',
+      safe: 'ACTIVE',
+      lr: 'lang_pt',
       ...config,
     });
   }
