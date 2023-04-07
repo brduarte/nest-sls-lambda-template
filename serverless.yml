@@ -1,4 +1,4 @@
-service: nest-sls-template
+service: my-trip
 
 frameworkVersion: '3'
 useDotenv: true
@@ -12,10 +12,18 @@ provider:
   runtime: nodejs16.x
   region: us-east-1
   timeout: 20
+  environment:
+    RUN_MODE: serverless
+
+package:
+  excludeDevDependencies: false
+  patterns:
+    - '!./**'
+    - './dist/**'
 
 functions:
   main:
-    handler: dist/main.handlers.http
+    handler: dist/main.handlers.http.bootstrap
     events:
       - httpApi: '*'
 

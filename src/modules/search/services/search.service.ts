@@ -13,12 +13,15 @@ export class SearchService {
   public async searchLocations(category: string, location: string) {
     const suggestions: string[] = await this.findSuggestion(category, location);
 
-    return this.findImagesBySuggestion(suggestions);
+    return this.findImagesBySuggestion(suggestions, location);
   }
-  private async findImagesBySuggestion(suggestions: string[]) {
+  private async findImagesBySuggestion(
+    suggestions: string[],
+    location: string,
+  ) {
     const execute = suggestions.map(async (suggestion) => {
       const images: ImageDto[] = await this.customSearchService.searchImage(
-        suggestion,
+        `Melhores Fotos de ${suggestion} - ${location}`,
       );
 
       return {
