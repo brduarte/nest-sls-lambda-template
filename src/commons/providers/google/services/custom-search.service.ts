@@ -8,7 +8,7 @@ export class CustomSearchService {
     const { data } = await this.search(search, {
       q: search,
       searchType: 'image',
-      imgType: 'photo',
+      imgType: 'stock',
       num: 3,
     });
 

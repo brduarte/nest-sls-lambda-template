@@ -12,6 +12,8 @@ provider:
   runtime: nodejs16.x
   region: us-east-1
   timeout: 20
+  httpApi:
+    cors: true
   environment:
     RUN_MODE: serverless
 
@@ -24,22 +26,9 @@ package:
 functions:
   main:
     handler: dist/main.handlers.http.bootstrap
+
     events:
       - httpApi: '*'
-
-  WSConnect:
-    handler: dist/main.handlers.ws.connection
-    events:
-      - websocket:
-          route: $connect
-      - websocket:
-          route: $disconnect
-
-  WSDefault:
-    handler: dist/main.handlers.ws.default
-    events:
-      - websocket:
-          route: $default
 
 
 

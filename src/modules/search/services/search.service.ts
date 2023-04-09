@@ -21,7 +21,7 @@ export class SearchService {
   ) {
     const execute = suggestions.map(async (suggestion) => {
       const images: ImageDto[] = await this.customSearchService.searchImage(
-        `Melhores Fotos de ${suggestion} - ${location}`,
+        `Fotos de ${suggestion} - ${location}`,
       );
 
       return {

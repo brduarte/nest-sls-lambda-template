@@ -6,7 +6,7 @@ export class TextService extends BaseClientService {
   constructor() {
     super({
       organization: 'org-OSl1JKP42K2b8fT0yMxk62Kf',
-      apiKey: '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',
+      apiKey: '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',
     });
   }
 

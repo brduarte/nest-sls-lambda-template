@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:dev": "nest start --watch",
     "start:dev:sls": "nodemon",
+    "deploy:hlg": "npm run build && sls deploy --stage hlg",
     "dev:sls": "npm run build && sls offline",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
