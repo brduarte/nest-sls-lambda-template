@@ -1,3 +1,5 @@
+import process from 'process';
+
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
@@ -9,5 +11,15 @@ export default () => ({
     database: String(process.env.DB_NAME),
     autoLoadEntities: true,
     synchronize: false,
+  },
+  google: {
+    customSearch: {
+      auth: String(process.env.GOOGLE_CUSTOM_SEARCH_AUTH),
+      cx: String(process.env.GOOGLE_CUSTOM_SEARCH_CX),
+    },
+  },
+  openIa: {
+    apiKey: String(process.env.OPEN_IA_API_KEY),
+    organization: String(process.env.OPEN_IA_ORGANIZATION),
   },
 });

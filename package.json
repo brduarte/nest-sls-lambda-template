@@ -41,6 +41,7 @@
     "googleapis": "^114.0.0",
     "mongodb": "^3.7.3",
     "mysql2": "^3.1.2",
+    "newrelic": "^9.15.0",
     "openai": "^3.2.1",
     "redis": "^4.6.4",
     "reflect-metadata": "^0.1.13",

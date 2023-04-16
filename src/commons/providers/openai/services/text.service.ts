@@ -1,12 +1,13 @@
 import { BaseClientService } from './base-client.service';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TextService extends BaseClientService {
-  constructor() {
+  constructor(private configService: ConfigService) {
     super({
-      organization: 'org-OSl1JKP42K2b8fT0yMxk62Kf',
-      apiKey: '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',
+      organization: configService.getOrThrow('openIa.organization'),
+      apiKey: configService.getOrThrow('openIa.apiKey'),
     });
   }
 
