@@ -5,7 +5,9 @@ import * as process from 'process';
 import { INestApplication } from '@nestjs/common';
 
 export async function bootstrap(event?, context?, callback?): Promise<any> {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(AppModule, {
+    cors: true,
+  });
 
   //Adiciona o prefix /v1 em todas as rotas
   app.setGlobalPrefix('v1');

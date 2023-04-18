@@ -40,6 +40,7 @@
     "class-validator": "^0.14.0",
     "googleapis": "^114.0.0",
     "mongodb": "^3.7.3",
+    "mongodb-client-encryption": "^2.7.1",
     "mysql2": "^3.1.2",
     "newrelic": "^9.15.0",
     "openai": "^3.2.1",
