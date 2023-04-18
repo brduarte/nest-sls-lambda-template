@@ -3,7 +3,7 @@ import { GoogleModule } from '../../commons/providers/google/google.module';
 import { OpenaiModule } from '../../commons/providers/openai/openai.module';
 import { SearchController } from './search.controller';
 import { SearchService } from './services/search.service';
-import { LocationRepository } from '../repositories/location.repository';
+import { LocationRepository } from './repositories/location.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Location } from '../../entities/location.entity';
 import { Image } from '../../entities/image.entity';

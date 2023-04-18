@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TextService } from '../../../commons/providers/openai/services/text.service';
 import { CustomSearchService } from '../../../commons/providers/google/services/custom-search.service';
 import { ImageDto } from '../../../commons/providers/google/dtos/image.dto';
-import { LocationRepository } from '../../repositories/location.repository';
+import { LocationRepository } from '../repositories/location.repository';
 import { Location } from '../../../entities/location.entity';
 
 @Injectable()
