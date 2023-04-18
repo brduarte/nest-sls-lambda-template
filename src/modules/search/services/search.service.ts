@@ -14,43 +14,56 @@ export class SearchService {
   ) {}
 
   public async searchLocations(category: string, location: string) {
-    const suggestions: string[] = await this.findSuggestion(category, location);
+    const suggestions: any[] = await this.findSuggestion(category, location);
 
     return this.findImagesBySuggestion(suggestions, location);
   }
-  private async findImagesBySuggestion(
-    suggestions: string[],
-    location: string,
-  ) {
+  private async findImagesBySuggestion(suggestions: any[], location: string) {
     const execute = suggestions.map(async (suggestion) => {
-      suggestion = suggestion.replace(/\d+\./g, '').trim();
-
-      const locationExist: Location = await this.locationRepository.findByTitle(
-        suggestion,
-      );
+      const locationExist: Location =
+        await this.locationRepository.findNameByType(
+          suggestion.name,
+          suggestion.type,
+        );
 
       if (locationExist) {
         return locationExist;
       }
 
       const images: ImageDto[] = await this.customSearchService.searchImage(
-        `Fotos de ${suggestion} - ${location}`,
+        `Fotos de ${suggestion.name} - ${suggestion.country}`,
       );
 
       return await this.locationRepository.save({
-        title: suggestion,
+        ...suggestion,
         images,
       } as unknown as Location);
     });
 
     return Promise.all(execute);
   }
-  private async findSuggestion(
-    category: string,
-    location: string,
-  ): Promise<string[]> {
+  private async findSuggestion(category: string, location: string) {
     const { choices } = await this.textService.completion(category, location);
 
-    return choices[0].text.split('\n').filter((value) => value !== '');
+    const params = {
+      name: 0,
+      city: 1,
+      state: 2,
+      country: 3,
+      type: 4,
+    };
+
+    const result = choices[0].text.split('\n').filter((value) => value !== '');
+    return result.map((value: string) => {
+      const data = value.split('|');
+
+      return {
+        name: data[params.name].replace(/\d+\./g, '').trim(),
+        city: data[params.city].trim(),
+        state: data[params.state].trim(),
+        country: data[params.country].trim(),
+        type: data[params.type].trim(),
+      };
+    });
   }
 }

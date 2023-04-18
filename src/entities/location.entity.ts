@@ -7,7 +7,19 @@ export class Location {
   id?: ObjectID;
 
   @Column()
-  title: string;
+  name: string;
+
+  @Column()
+  city: string;
+
+  @Column()
+  state: string;
+
+  @Column()
+  country: string;
+
+  @Column()
+  type: string;
 
   @Column((type) => Image)
   images: Image[];

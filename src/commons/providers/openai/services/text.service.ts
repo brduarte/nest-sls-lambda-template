@@ -18,7 +18,7 @@ export class TextService extends BaseClientService {
       model: 'text-davinci-003',
       prompt: prompt,
       temperature: 0.5,
-      max_tokens: 150,
+      max_tokens: 300,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
@@ -28,7 +28,7 @@ export class TextService extends BaseClientService {
   }
 
   private mountText(category: string, location: string): string {
-    return 'liste #category# legais para um turista visitar em #location#'
+    return 'liste #category# legais para um turista visitar em #location#. retorne nesse padrão: nome | cidade | estado | país | tipo de logar'
       .replace(/#(location)#/g, location)
       .replace(/#(category)#/, category);
   }

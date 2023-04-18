@@ -8,10 +8,11 @@ export class LocationRepository extends Repository<Location> {
     super(Location, dataSource.createEntityManager());
   }
 
-  async findByTitle(title: string): Promise<Location> {
+  async findNameByType(name: string, type: string): Promise<Location> {
     return await this.findOne({
       where: {
-        title,
+        name,
+        type,
       },
     });
   }
