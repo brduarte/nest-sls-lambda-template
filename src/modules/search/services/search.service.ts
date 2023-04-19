@@ -13,34 +13,58 @@ export class SearchService {
     private locationRepository: LocationRepository,
   ) {}
 
-  public async searchLocations(category: string, location: string) {
-    const suggestions: any[] = await this.findSuggestion(category, location);
+  /**
+   * @description Busca locais com base indicados com base nos parâmetros de busca
+   * @param type - Tipo de busca ex: Bar. Praia, Trilha
+   * @param place - Local pode ser pais, cidade ou estado
+   */
+  public async search(type: string, place: string): Promise<Location[]> {
+    let response: Location[];
 
-    return this.findImagesBySuggestion(suggestions, location);
+    const places: Location[] =
+      await this.locationRepository.findByCountryAndType(place, type);
+
+    if (places.length) {
+      response = [...places];
+    } else {
+      response = [...(await this.findImagesBySuggestion(type, place))];
+    }
+
+    return response;
   }
-  private async findImagesBySuggestion(suggestions: any[], location: string) {
-    const execute = suggestions.map(async (suggestion) => {
+  private async findImagesBySuggestion(
+    type: string,
+    place: string,
+  ): Promise<Location[]> {
+    const result: Location[] = [];
+    const suggestions: any[] = await this.findSuggestion(type, place);
+
+    for (const suggestion of suggestions) {
       const locationExist: Location =
-        await this.locationRepository.findNameByType(
+        await this.locationRepository.findOneNameByType(
           suggestion.name,
           suggestion.type,
         );
 
       if (locationExist) {
-        return locationExist;
+        result.push(locationExist);
+      } else {
+        result.push(await this.createNewLocation(suggestion));
       }
+    }
 
-      const images: ImageDto[] = await this.customSearchService.searchImage(
-        `Fotos de ${suggestion.name} - ${suggestion.country}`,
-      );
+    return result;
+  }
 
-      return await this.locationRepository.save({
-        ...suggestion,
-        images,
-      } as unknown as Location);
-    });
+  private async createNewLocation(suggestion): Promise<Location> {
+    const images: ImageDto[] = await this.customSearchService.searchImage(
+      `Fotos de ${suggestion.name} - ${suggestion.country}`,
+    );
 
-    return Promise.all(execute);
+    return this.locationRepository.save({
+      ...suggestion,
+      images,
+    } as unknown as Location);
   }
   private async findSuggestion(category: string, location: string) {
     const { choices } = await this.textService.completion(category, location);
