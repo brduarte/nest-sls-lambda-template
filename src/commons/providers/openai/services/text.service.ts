@@ -26,6 +26,21 @@ export class TextService extends BaseClientService {
 
     return data;
   }
+  public async completionArticle(about: string) {
+    const prompt = `Escreva uma texto para blog sobre ${about}. Responda em formato html`;
+
+    const { data } = await this.openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt,
+      temperature: 0.5,
+      max_tokens: 4000,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
+    });
+
+    return data;
+  }
 
   private mountText(category: string, location: string): string {
     return 'liste #category# legais para um turista visitar em #location#. retorne nesse padrão: nome | cidade | estado | país | tipo de logar'
