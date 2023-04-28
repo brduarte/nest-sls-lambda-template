@@ -19,5 +19,6 @@ import DatabaseModule from '../../commons/database/database.module';
   ],
   controllers: [SearchController],
   providers: [SearchService, LocationRepository],
+  exports: [LocationRepository],
 })
 export class SearchModule {}

@@ -1,4 +1,5 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import { Location } from './location.entity';
 
 @Entity()
 export class Article {
@@ -6,10 +7,13 @@ export class Article {
   id?: ObjectID;
 
   @Column()
+  title: string;
+
+  @Column()
   content: string;
 
   @Column((type) => Location)
-  locations: Location[];
+  locations: Location;
 
   @Column()
   image: string;
