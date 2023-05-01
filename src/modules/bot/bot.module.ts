@@ -9,9 +9,11 @@ import { Location } from '../../entities/location.entity';
 import { Image } from '../../entities/image.entity';
 import { Thumbnail } from '../../entities/thumbnail.entity';
 import { Article } from '../../entities/article.entity';
+import ConfigModule from '../../commons/config/config.module';
 
 @Module({
   imports: [
+    ConfigModule,
     OpenaiModule,
     SearchModule,
     TypeOrmModule.forFeature([Location, Image, Thumbnail, Article]),

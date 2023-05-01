@@ -26,10 +26,16 @@ package:
 functions:
   main:
     handler: dist/main.handlers.http.bootstrap
-
     events:
       - httpApi: '*'
 
+  closeOrdersSchedule:
+    handler: dist/main.handlers.schedules.createArticle
+    events:
+      - schedule:
+          name: create-article
+          description: 'Gerar artigo automaticamente'
+          rate: rate(1 minute)
 
 
 
