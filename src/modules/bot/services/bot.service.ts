@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { TextService } from '../../../commons/providers/openai/services/text.service';
 import { CreateCompletionResponse } from 'openai';
-import { ArticleRepository } from '../repositories/article.repository';
+import { ArticleRepository } from '../../article/repositories/article.repository';
 import { LocationRepository } from '../../search/repositories/location.repository';
 import { RandomUtil } from '../../../Utils/Random.util';
 import { Location } from '../../../entities/location.entity';
@@ -25,6 +25,7 @@ export class BotService {
       locations: subject,
       title: article.title,
       content: article.content,
+      type: subject.type,
     });
   }
 
@@ -41,9 +42,7 @@ export class BotService {
   }
 
   private async generateSubjectRandom(): Promise<Location> {
-    const subjects: Location[] = await this.locationRepository.find({
-      select: ['name'],
-    });
+    const subjects: Location[] = await this.locationRepository.find();
 
     if (!subjects.length) {
       throw new HttpException('Subject not found', HttpStatus.NOT_FOUND);

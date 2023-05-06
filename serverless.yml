@@ -11,7 +11,7 @@ provider:
   name: aws
   runtime: nodejs16.x
   region: us-east-1
-  timeout: 20
+  timeout: 30
   httpApi:
     cors: true
   environment:
@@ -35,7 +35,7 @@ functions:
       - schedule:
           name: create-article
           description: 'Gerar artigo automaticamente'
-          rate: rate(1 minute)
+          rate: rate(8 hours)
 
 
 

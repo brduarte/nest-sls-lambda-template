@@ -1,4 +1,10 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+} from 'typeorm';
 import { Location } from './location.entity';
 
 @Entity()
@@ -15,6 +21,11 @@ export class Article {
   @Column((type) => Location)
   locations: Location;
 
+  type: string;
+
   @Column()
-  image: string;
+  banner: string;
+
+  @CreateDateColumn()
+  createAt: Date;
 }
