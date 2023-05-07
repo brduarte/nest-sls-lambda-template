@@ -9,7 +9,7 @@ import { Location } from './location.entity';
 
 @Entity()
 export class Article {
-  @ObjectIdColumn()
+  @ObjectIdColumn({ name: '_id' })
   id?: ObjectID;
 
   @Column()
@@ -21,6 +21,7 @@ export class Article {
   @Column((type) => Location)
   locations: Location;
 
+  @Column()
   type: string;
 
   @Column()
