@@ -10,11 +10,17 @@ export class ArticleRepository extends MongoRepository<Article> {
   }
 
   getArticles(type?: string) {
-    return this.find({
-      where: {
-        type: type,
-      },
-    });
+    let options = {};
+
+    if (type) {
+      options = {
+        where: {
+          type: type,
+        },
+      };
+    }
+
+    return this.find(options);
   }
 
   findById(id: string): Promise<Article> {
